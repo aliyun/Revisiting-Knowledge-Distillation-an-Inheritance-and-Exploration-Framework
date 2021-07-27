@@ -1,4 +1,4 @@
- # IE-KD
+ # Revisiting Knowledge Distillation: An Inheritance and Exploration Framework
 
  This repository is the official implementation of:
 
