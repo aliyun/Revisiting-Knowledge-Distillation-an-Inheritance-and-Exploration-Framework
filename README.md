@@ -9,7 +9,7 @@ Deng, Jianqiang Huang, Xian-Sheng Hua
 
 *CVPR 2021*
 
-<img src="ie-kd_diagram.png" width="400">
+<img src="ie-kd_diagram.png" width="600">
  
 
 ### Overview
