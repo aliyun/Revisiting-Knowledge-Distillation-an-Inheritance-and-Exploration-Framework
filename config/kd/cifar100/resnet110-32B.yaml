@@ -1,0 +1,33 @@
+work_dir: ./logs/kd/cifar100/resnet110-32B
+processor: KnowledgeDistillation
+
+# dataset
+feeder: cifar100
+batch_size: 128
+test_batch_size: 64
+
+# model
+teacher_weights: ./logs/ind/cifar100/resnet110_A/model.pth.tar
+teacher: resnet110
+student: resnet32B
+
+print_model: False
+
+# loss
+loss: KDLoss
+loss_args:
+    alpha: 0.9
+    T: 4
+
+# optim
+weight_decay: 0.0005
+nesterov: True
+
+num_epoch: 160
+lr_decay:
+    base: 0.1
+    policy: MultiStep
+    milestones: [80, 120]
+
+# general
+save_interval: 20

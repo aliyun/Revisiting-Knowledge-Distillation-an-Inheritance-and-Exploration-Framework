@@ -1,0 +1,27 @@
+work_dir: ./logs/DML/cifar100/resnet56-20-bs128
+processor: DML
+
+# dataset
+feeder: cifar100
+batch_size: 128
+test_batch_size: 64
+
+# model
+teacher: resnet56B
+student: resnet32B
+print_model: False
+
+# loss
+loss: DMLLoss
+
+# optim
+weight_decay: 0.0005
+nesterov: True
+num_epoch: 160
+lr_decay:
+    base: 0.1
+    policy: MultiStep
+    milestones: [80, 120]
+
+# general
+save_interval: 20

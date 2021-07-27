@@ -1,0 +1,44 @@
+work_dir: ./logs/ft/cifar100/mobilenet-resnet32B-embed32
+processor: FactorTransfer
+
+# dataset
+feeder: feeder.cifar100
+batch_size: 128
+test_batch_size: 64
+
+# model
+teacher_weights: ./logs/ind/cifar100/mobilenet/model.pth.tar
+teacher: model.mobilenet
+student: model.resnet32
+student_model_args:
+    option: B
+
+teacher_embed_args:
+    cin: 1024
+    cout: 32
+student_embed_args:
+    cin: 64
+    cout: 32
+print_model: False
+
+# loss
+loss: loss.FTLoss
+loss_weight: 500
+
+# optim
+weight_decay: 0.0005
+weight_decay_embed: 0.0005
+nesterov: True
+base_lr: 0.1
+
+# train teacher's auto-encoder
+num_epoch_embedT: 30
+
+# train student
+num_epoch: 160
+lr_argsS:
+    policy: MultiStep
+    milestones: [80, 120]
+
+# general
+save_interval: 20

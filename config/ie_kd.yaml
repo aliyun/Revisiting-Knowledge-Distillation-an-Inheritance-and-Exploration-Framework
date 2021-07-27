@@ -1,0 +1,53 @@
+work_dir: ./logs/IE_KD
+processor: Dedistill
+
+# dataset
+feeder: cifar10
+batch_size: 128
+test_batch_size: 64
+
+# model
+student: resnet20B
+student_model_args:
+    num_classes: 10
+student_embed_args:
+    cin: 64
+    cout: 32
+student_weights: ./logs/ind/cifar10/resnet20/model.pth.tar
+
+teacher: resnet56B
+teacher_model_args:
+    num_classes: 10
+teacher_embedI_args:
+    cin: 32
+    cout: 32
+teacher_embedE_args:
+    cin: 32
+    cout: 32
+print_model: False
+
+# loss
+loss: FTLoss
+inh_loss_weight_decay:
+    base: 1
+exp_loss_weight_decay:
+    base: 1
+
+# optim
+weight_decay: 0.0005
+nesterov: True
+
+# train student's auto-encoder
+num_epoch_embedS: 30
+lr_decayS:
+    base: 0.1
+
+# train teacher
+num_epoch: 160
+lr_decayT:
+    base: 0.1
+    policy: MultiStep
+    milestones: [80, 120]
+
+# general
+save_interval: 20

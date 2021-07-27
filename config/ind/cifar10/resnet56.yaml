@@ -1,0 +1,25 @@
+work_dir: ./logs/ind/cifar10/resnet56-A
+processor: Processor
+
+# dataset
+feeder: cifar10
+batch_size: 128
+test_batch_size: 64
+
+# model
+model: resnet56B
+model_args:
+    num_classes: 10
+print_model: True
+
+# optim
+weight_decay: 0.0005
+nesterov: True
+num_epoch: 160
+lr_decay:
+    base: 0.1
+    policy: MultiStep
+    milestones: [80, 120]
+
+# general
+save_interval: 20

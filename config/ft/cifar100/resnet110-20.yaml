@@ -1,0 +1,46 @@
+work_dir: ./logs/ft/cifar100/resnet110-20
+processor: FactorTransfer
+
+# dataset
+feeder: feeder.cifar100
+batch_size: 128
+test_batch_size: 64
+
+# model
+teacher: model.resnet110
+teacher_weights: ./logs/ind/cifar100/resnet110_A/model.pth.tar
+student: model.resnet20
+student_model_args:
+    option: B
+teacher_embed_args:
+    cin: 64
+    cout: 32
+student_embed_args:
+    cin: 64
+    cout: 32
+print_model: False
+
+# loss
+loss: loss.FTLoss
+loss_weight: 500
+
+# optim
+weight_decay: 0.0005
+weight_decay_embed: 0.0001
+nesterov: True
+base_lr: 0.1
+
+# train teacher's auto-encoder
+num_epoch_embedT: 30
+lr_args_embedT:
+    base_lr: 0.1
+
+# train student
+num_epoch: 160
+lr_argsS:
+    base_lr: 0.1
+    policy: MultiStep
+    milestones: [80, 120]
+
+# general
+save_interval: 20
